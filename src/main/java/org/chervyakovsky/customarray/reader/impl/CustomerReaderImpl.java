@@ -27,6 +27,7 @@ public class CustomerReaderImpl implements CustomerReader {
                 arrayList.add(scanner.nextLine());
             }
         } catch (Exception e) {
+            LOGGER.error("The problem with reading the file", e);
             throw new CustomException("The problem with reading the file", e);
         }
         return arrayList;
@@ -35,13 +36,16 @@ public class CustomerReaderImpl implements CustomerReader {
     private void checkFile(String fileName) throws CustomException {
         LOGGER.info("Checking file");
         if (fileName == null || fileName.isEmpty()) {
+            LOGGER.error("FileName is null or empty string");
             throw new CustomException("FileName is null or empty string");
         }
         File file = new File(fileName);
         if (!file.exists()) {
+            LOGGER.error("The file does not exist");
             throw new CustomException("The file does not exist");
         }
         if (file.length() == 0 || !file.canRead()) {
+            LOGGER.error("The file cannot be read or is empty");
             throw new CustomException("The file cannot be read or is empty");
         }
     }

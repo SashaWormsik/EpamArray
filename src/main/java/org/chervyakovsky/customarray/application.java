@@ -48,7 +48,7 @@ public class application {
             System.out.println(customArray);
 
         } catch (CustomException e) {
-            LOGGER.info(e);
+            LOGGER.error(e);
         }
 
     }
