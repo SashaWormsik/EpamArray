@@ -3,7 +3,13 @@ package org.chervyakovsky.customarray.creator;
 import org.chervyakovsky.customarray.entity.CustomArray;
 import org.chervyakovsky.customarray.exception.CustomException;
 
+import java.util.List;
+
 public interface CreateCustomerArray {
 
-    public CustomArray createArray(int... array) throws CustomException;
+    CustomArray createCustomArray();
+
+    CustomArray createArray(int... array) throws CustomException;
+
+    List<CustomArray> createCustomArray(List<int[]> arrays);
 }

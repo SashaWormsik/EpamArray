@@ -13,8 +13,8 @@ public class SearchServiceCustomImpl implements SearchService {
     @Override
     public int searchMin(CustomArray customArray) throws CustomException {
         logger.info("Method to find min element start");
-        if (customArray.getArray().length == 0) {
-            throw new CustomException("Array is empty");
+        if (customArray == null) {
+            throw new CustomException("Array can not be NULL");
         }
         int[] array = customArray.getArray();
         int min = array[0];
@@ -30,8 +30,8 @@ public class SearchServiceCustomImpl implements SearchService {
     @Override
     public int searchMax(CustomArray customArray) throws CustomException {
         logger.info("Method to find max element start");
-        if (customArray.getArray().length == 0) {
-            throw new CustomException("Array is empty");
+        if (customArray == null) {
+            throw new CustomException("Array can not be NULL");
         }
         int[] array = customArray.getArray();
         int max = array[0];

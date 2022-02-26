@@ -13,8 +13,8 @@ public class SortingServiceCustomImpl implements SortingService {
     @Override
     public void selectionSort(CustomArray customArray) throws CustomException {
         logger.info("Method to sort array by selectionSort start");
-        if (customArray.getArray().length == 0) {
-            throw new CustomException("Array is empty");
+        if (customArray == null) {
+            throw new CustomException("Array can not be NULL");
         }
         int[] array = customArray.getArray();
         for (int i = 0; i < array.length; i++) {
@@ -28,8 +28,8 @@ public class SortingServiceCustomImpl implements SortingService {
     @Override
     public void bubbleSort(CustomArray customArray) throws CustomException {
         logger.info("Method to sort array by bubbleSort start");
-        if (customArray.getArray().length == 0) {
-            throw new CustomException("Array is empty");
+        if (customArray == null) {
+            throw new CustomException("Array can not be NULL");
         }
         int[] array = customArray.getArray();
         for (int i = array.length - 1; i > 0; i--) {
@@ -47,8 +47,8 @@ public class SortingServiceCustomImpl implements SortingService {
     @Override
     public void insertionSort(CustomArray customArray) throws CustomException {
         logger.info("Method to sort array by insertionSort start");
-        if (customArray.getArray().length == 0) {
-            throw new CustomException("Array is empty");
+        if (customArray == null) {
+            throw new CustomException("Array can not be NULL");
         }
         int[] array = customArray.getArray();
         for (int i = 0; i < array.length; i++) {

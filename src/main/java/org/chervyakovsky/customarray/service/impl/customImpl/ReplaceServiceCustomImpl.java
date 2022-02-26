@@ -13,8 +13,8 @@ public class ReplaceServiceCustomImpl implements ReplaceService {
     @Override
     public void replaceAll(CustomArray customArray, int nValue, int oldValue) throws CustomException {
         logger.info("Method replace elements start");
-        if (customArray.getArray().length == 0) {
-            throw new CustomException("Array is empty");
+        if (customArray == null) {
+            throw new CustomException("Array can not be NULL");
         }
         int[] array = customArray.getArray();
         for (int i = 0; i < array.length; i++) {
@@ -29,8 +29,8 @@ public class ReplaceServiceCustomImpl implements ReplaceService {
     @Override
     public void replaceNegativeValue(CustomArray customArray, int nValue) throws CustomException {
         logger.info("Method replace elements start");
-        if (customArray.getArray().length == 0) {
-            throw new CustomException("Array is empty");
+        if (customArray == null) {
+            throw new CustomException("Array can not be NULL");
         }
         int[] array = customArray.getArray();
         for (int i = 0; i < array.length; i++) {

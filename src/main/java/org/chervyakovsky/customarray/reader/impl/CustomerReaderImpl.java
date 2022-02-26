@@ -7,6 +7,7 @@ import org.chervyakovsky.customarray.reader.CustomerReader;
 
 import java.io.File;
 import java.io.FileReader;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -35,7 +36,7 @@ public class CustomerReaderImpl implements CustomerReader {
 
     private void checkFile(String fileName) throws CustomException {
         LOGGER.info("Checking file");
-        if (fileName == null || fileName.isEmpty()) {
+        if (fileName == null || fileName.trim().isEmpty()) {
             LOGGER.error("FileName is null or empty string");
             throw new CustomException("FileName is null or empty string");
         }
@@ -44,7 +45,7 @@ public class CustomerReaderImpl implements CustomerReader {
             LOGGER.error("The file does not exist");
             throw new CustomException("The file does not exist");
         }
-        if (file.length() == 0 || !file.canRead()) {
+        if (!file.canRead()) {
             LOGGER.error("The file cannot be read or is empty");
             throw new CustomException("The file cannot be read or is empty");
         }
