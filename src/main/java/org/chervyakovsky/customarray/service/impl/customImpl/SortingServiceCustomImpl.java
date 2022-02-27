@@ -10,11 +10,11 @@ import java.util.Arrays;
 
 public class SortingServiceCustomImpl implements SortingService {
 
-    Logger logger = LogManager.getLogger();
+    private static final Logger LOGGER = LogManager.getLogger();
 
     @Override
     public void selectionSort(CustomArray customArray) throws CustomException {
-        logger.info("Method to sort array by selectionSort start");
+        LOGGER.info("Method to sort array by selectionSort start");
         if (customArray == null) {
             throw new CustomException("Array can not be NULL");
         }
@@ -29,7 +29,7 @@ public class SortingServiceCustomImpl implements SortingService {
 
     @Override
     public void bubbleSort(CustomArray customArray) throws CustomException {
-        logger.info("Method to sort array by bubbleSort start");
+        LOGGER.info("Method to sort array by bubbleSort start");
         if (customArray == null) {
             throw new CustomException("Array can not be NULL");
         }
@@ -48,7 +48,7 @@ public class SortingServiceCustomImpl implements SortingService {
 
     @Override
     public void insertionSort(CustomArray customArray) throws CustomException {
-        logger.info("Method to sort array by insertionSort start");
+        LOGGER.info("Method to sort array by insertionSort start");
         if (customArray == null) {
             throw new CustomException("Array can not be NULL");
         }
@@ -67,7 +67,7 @@ public class SortingServiceCustomImpl implements SortingService {
 
     @Override
     public void streamSort(CustomArray customArray) throws CustomException {
-        logger.info("Method to sort array by stream start");
+        LOGGER.info("Method to sort array by stream start");
         if (customArray == null) {
             throw new CustomException("Array can not be NULL");
         }
@@ -78,6 +78,7 @@ public class SortingServiceCustomImpl implements SortingService {
 
     private static int minIndex(int[] array, int start, int end) throws CustomException {
         if (array.length == 0) {
+            LOGGER.error("Array is empty in minIndex method");
             throw new CustomException("Array is empty");
         }
         int minIndex = start;

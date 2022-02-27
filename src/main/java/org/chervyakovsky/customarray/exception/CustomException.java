@@ -10,11 +10,11 @@ public class CustomException extends Exception {
         super(message);
     }
 
-    public CustomException(String message, Throwable cause) {
-        super(message, cause);
+    public CustomException(String message, Exception exception) {
+        super(message, exception);
     }
 
-    public CustomException(Throwable cause) {
-        super(cause);
+    public CustomException(Exception exception) {
+        super(exception);
     }
 }

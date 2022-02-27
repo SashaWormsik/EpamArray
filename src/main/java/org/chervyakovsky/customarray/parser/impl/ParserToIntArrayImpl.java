@@ -65,7 +65,7 @@ public class ParserToIntArrayImpl implements ParserToIntArray {
     private void validateListString(List<String> dataString) throws CustomException { //FIXME
         CustomerArrayValidator validator = CustomerArrayValidator.getInstance();
         if (dataString == null) {
-            LOGGER.error("String is NULL");
+            LOGGER.error("List<String> is NULL");
             throw new CustomException("List strings is NULL in validateListString method");
         }
         boolean noValidString = true;

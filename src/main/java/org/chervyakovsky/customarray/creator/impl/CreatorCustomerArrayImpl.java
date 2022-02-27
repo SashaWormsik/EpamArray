@@ -28,7 +28,7 @@ public class CreatorCustomerArrayImpl implements CreateCustomerArray {
     public List<CustomArray> createCustomArray(List<int[]> arrays) {
         LOGGER.info("Method to create CustomArray start");
         List<CustomArray> customArrayList = new ArrayList<>();
-        if (arrays == null) {
+        if (arrays == null) {  // FIXME
             return customArrayList;
         }
         for (int[] element : arrays) {
