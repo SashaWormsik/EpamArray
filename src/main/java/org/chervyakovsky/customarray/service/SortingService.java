@@ -10,4 +10,6 @@ public interface SortingService {
     void bubbleSort(CustomArray customArray) throws CustomException;
 
     void insertionSort(CustomArray customArray) throws CustomException;
+
+    void streamSort(CustomArray customArray) throws CustomException;
 }

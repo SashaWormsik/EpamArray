@@ -1,4 +1,4 @@
-package org.chervyakovsky.customarray.service.impl.customImpl;
+package org.chervyakovsky.customarray.service.impl.streamImpl;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -6,7 +6,9 @@ import org.chervyakovsky.customarray.entity.CustomArray;
 import org.chervyakovsky.customarray.exception.CustomException;
 import org.chervyakovsky.customarray.service.ReplaceService;
 
-public class ReplaceServiceCustomImpl implements ReplaceService {
+import java.util.Arrays;
+
+public class ReplaceServiceStreamImpl implements ReplaceService {
 
     private static final Logger LOGGER = LogManager.getLogger();
 
@@ -17,11 +19,10 @@ public class ReplaceServiceCustomImpl implements ReplaceService {
             throw new CustomException("Array can not be NULL");
         }
         int[] array = customArray.getArray();
-        for (int i = 0; i < array.length; i++) {
-            if (array[i] == oldValue) {
-                array[i] = newValue;
-            }
+        if (array.length == 0) {
+            return;
         }
+        array = Arrays.stream(array).map((x) -> (x == oldValue) ? newValue : x).toArray();
         customArray.setArray(array);
     }
 
@@ -32,11 +33,10 @@ public class ReplaceServiceCustomImpl implements ReplaceService {
             throw new CustomException("Array can not be NULL");
         }
         int[] array = customArray.getArray();
-        for (int i = 0; i < array.length; i++) {
-            if (array[i] < 0) {
-                array[i] = newValue;
-            }
+        if (array.length == 0) {
+            return;
         }
+        array = Arrays.stream(array).map((x) -> (x < 0) ? newValue : x).toArray();
         customArray.setArray(array);
     }
 }

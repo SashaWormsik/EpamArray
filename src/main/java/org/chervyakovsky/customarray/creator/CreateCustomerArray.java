@@ -9,7 +9,7 @@ public interface CreateCustomerArray {
 
     CustomArray createCustomArray();
 
-    CustomArray createArray(int... array) throws CustomException;
+    CustomArray createCustomArray(int... array) throws CustomException;
 
     List<CustomArray> createCustomArray(List<int[]> arrays);
 }

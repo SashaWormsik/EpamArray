@@ -13,16 +13,16 @@ public class CustomerArrayValidator {
     private CustomerArrayValidator() {
     }
 
-    public static CustomerArrayValidator getInstance(){
-        if (instance == null){
+    public static CustomerArrayValidator getInstance() {
+        if (instance == null) {
             instance = new CustomerArrayValidator();
         }
         return instance;
     }
 
-    public static boolean isValid(String checkString) {
+    public boolean isValid(String checkString) {
         boolean isValid = checkString != null && (checkString.trim().isEmpty() || checkString.matches(REGEX_FOR_VALIDATION));
-        LOGGER.log(Level.INFO, isValid ? "Read valid array: {}" : "Read invalid array: {}", checkString);
+        LOGGER.log(Level.INFO, isValid ? "Valid string: {}" : "Invalid string: {}", checkString);
         return isValid;
     }
 }

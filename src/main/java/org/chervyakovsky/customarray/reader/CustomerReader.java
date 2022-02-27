@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface CustomerReader {
 
-    public List<String> fileReader(String fileName) throws CustomException;
+    public List<String> readAllFile(String fileName) throws CustomException;
 }

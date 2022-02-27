@@ -1,4 +1,4 @@
-package org.chervyakovsky.customarray.service.impl.customImpl;
+package org.chervyakovsky.customarray.service.impl.streamImpl;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -6,7 +6,9 @@ import org.chervyakovsky.customarray.entity.CustomArray;
 import org.chervyakovsky.customarray.exception.CustomException;
 import org.chervyakovsky.customarray.service.SearchService;
 
-public class SearchServiceCustomImpl implements SearchService {
+import java.util.Arrays;
+
+public class SearchServiceStreamImpl implements SearchService {
 
     private static final Logger LOGGER = LogManager.getLogger();
 
@@ -17,12 +19,7 @@ public class SearchServiceCustomImpl implements SearchService {
             throw new CustomException("Array can not be NULL");
         }
         int[] array = customArray.getArray();
-        int min = array[0];
-        for (int i : array) {
-            if (min > i) {
-                min = i;
-            }
-        }
+        int min = Arrays.stream(array).min().getAsInt(); //FIXME
         return min;
     }
 
@@ -33,12 +30,7 @@ public class SearchServiceCustomImpl implements SearchService {
             throw new CustomException("Array can not be NULL");
         }
         int[] array = customArray.getArray();
-        int max = array[0];
-        for (int i : array) {
-            if (max < i) {
-                max = i;
-            }
-        }
+        int max = Arrays.stream(array).max().getAsInt(); //FIXME
         return max;
     }
 }

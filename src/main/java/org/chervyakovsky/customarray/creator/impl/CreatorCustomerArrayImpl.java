@@ -19,9 +19,9 @@ public class CreatorCustomerArrayImpl implements CreateCustomerArray {
     }
 
     @Override
-    public CustomArray createArray(int... array) {
+    public CustomArray createCustomArray(int... array) {
         LOGGER.info("Method to create CustomArray start");
-        return new CustomArray(array);
+        return array == null ? new CustomArray() : new CustomArray(array); // FIXME
     }
 
     @Override

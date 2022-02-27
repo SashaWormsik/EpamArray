@@ -6,6 +6,8 @@ import org.chervyakovsky.customarray.entity.CustomArray;
 import org.chervyakovsky.customarray.exception.CustomException;
 import org.chervyakovsky.customarray.service.SortingService;
 
+import java.util.Arrays;
+
 public class SortingServiceCustomImpl implements SortingService {
 
     Logger logger = LogManager.getLogger();
@@ -63,6 +65,17 @@ public class SortingServiceCustomImpl implements SortingService {
         customArray.setArray(array);
     }
 
+    @Override
+    public void streamSort(CustomArray customArray) throws CustomException {
+        logger.info("Method to sort array by stream start");
+        if (customArray == null) {
+            throw new CustomException("Array can not be NULL");
+        }
+        int [] array = customArray.getArray();
+        array = Arrays.stream(array).sorted().toArray();
+        customArray.setArray(array);
+    }
+
     private static int minIndex(int[] array, int start, int end) throws CustomException {
         if (array.length == 0) {
             throw new CustomException("Array is empty");
@@ -77,4 +90,5 @@ public class SortingServiceCustomImpl implements SortingService {
         }
         return minIndex;
     }
+
 }

@@ -1,4 +1,4 @@
-package org.chervyakovsky.customarray.service.impl.customImpl;
+package org.chervyakovsky.customarray.service.impl.streamImpl;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -6,7 +6,9 @@ import org.chervyakovsky.customarray.entity.CustomArray;
 import org.chervyakovsky.customarray.exception.CustomException;
 import org.chervyakovsky.customarray.service.CalculateService;
 
-public class CalculateServiceCustomImpl implements CalculateService {
+import java.util.Arrays;
+
+public class CalculateServiceStreamImpl implements CalculateService {
 
     private static final Logger LOGGER = LogManager.getLogger();
 
@@ -17,11 +19,7 @@ public class CalculateServiceCustomImpl implements CalculateService {
             throw new CustomException("Array can not be NULL");
         }
         int[] array = customArray.getArray();
-        int sum = 0;
-        for (int i : array) {
-            sum += i;
-        }
-        return sum;
+        return Arrays.stream(array).sum();
     }
 
     @Override
@@ -30,13 +28,9 @@ public class CalculateServiceCustomImpl implements CalculateService {
         if (customArray == null) {
             throw new CustomException("Array can not be NULL");
         }
-        try {
-            double average = (double) sumArrayElements(customArray) / customArray.getArray().length;
-            return average;
-        } catch (ArithmeticException e) {
-            LOGGER.error("Division by zero. Array is empty", e);
-            throw new CustomException("Division by zero. Array is empty", e);
-        }
+        int[] array = customArray.getArray();
+        return Arrays.stream(array).average().getAsDouble(); // FIXME
+
     }
 
     @Override
@@ -45,13 +39,8 @@ public class CalculateServiceCustomImpl implements CalculateService {
         if (customArray == null) {
             throw new CustomException("Array can not be NULL");
         }
-        int amount = 0;
-        for (int i : customArray.getArray()) {
-            if (i < 0) {
-                amount++;
-            }
-        }
-        return amount;
+        int[] array = customArray.getArray();
+        return (int) Arrays.stream(array).filter(x -> x < 0).count();
     }
 
     @Override
@@ -60,13 +49,7 @@ public class CalculateServiceCustomImpl implements CalculateService {
         if (customArray == null) {
             throw new CustomException("Array can not be NULL");
         }
-        int amount = 0;
-        for (int i : customArray.getArray()) {
-            if (i > 0) {
-                amount++;
-            }
-        }
-        return amount;
+        int[] array = customArray.getArray();
+        return (int) Arrays.stream(array).filter(x -> x < 0).count();
     }
-
 }

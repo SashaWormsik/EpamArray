@@ -5,29 +5,28 @@ import org.apache.logging.log4j.Logger;
 import org.chervyakovsky.customarray.exception.CustomException;
 import org.chervyakovsky.customarray.reader.CustomerReader;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.nio.file.Files;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class CustomerReaderImpl implements CustomerReader {
 
     private static final Logger LOGGER = LogManager.getLogger();
 
     @Override
-    public List<String> fileReader(String fileName) throws CustomException {
+    public List<String> readAllFile(String fileName) throws CustomException {
         LOGGER.info("Method to read data from file start");
         checkFile(fileName);
-        File file = new File(fileName);
         ArrayList<String> arrayList = new ArrayList<>();
-        try (FileReader fileReader = new FileReader(file)) {
-            Scanner scanner = new Scanner(fileReader);
-            while (scanner.hasNextLine()) {
-                arrayList.add(scanner.nextLine());
+        String currentString;
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(new File(fileName)))) {//FIXME
+            while ((currentString = bufferedReader.readLine()) != null) {
+                arrayList.add(currentString);
             }
-        } catch (Exception e) {
+        } catch (IOException e) {
             LOGGER.error("The problem with reading the file", e);
             throw new CustomException("The problem with reading the file", e);
         }
@@ -43,11 +42,11 @@ public class CustomerReaderImpl implements CustomerReader {
         File file = new File(fileName);
         if (!file.exists()) {
             LOGGER.error("The file does not exist");
-            throw new CustomException("The file does not exist");
+            throw new CustomException("The file " + fileName + " does not exist");
         }
         if (!file.canRead()) {
             LOGGER.error("The file cannot be read or is empty");
-            throw new CustomException("The file cannot be read or is empty");
+            throw new CustomException("The file " + fileName + " cannot be read or is empty");
         }
     }
 }
