@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 import org.chervyakovsky.customarray.entity.CustomArray;
 import org.chervyakovsky.customarray.exception.CustomException;
 import org.chervyakovsky.customarray.service.CalculateService;
+import org.chervyakovsky.customarray.util.ArrayValidator;
 
 public class CalculateServiceCustomImpl implements CalculateService {
 
@@ -13,9 +14,7 @@ public class CalculateServiceCustomImpl implements CalculateService {
     @Override
     public int sumArrayElements(CustomArray customArray) throws CustomException {
         LOGGER.info("Method to calculate sum of array start");
-        if (customArray == null) {
-            throw new CustomException("Array can not be NULL");
-        }
+        ArrayValidator.checkingCustomArray(customArray);
         int[] array = customArray.getArray();
         int sum = 0;
         for (int i : array) {
@@ -27,9 +26,7 @@ public class CalculateServiceCustomImpl implements CalculateService {
     @Override
     public double averageArrayElements(CustomArray customArray) throws CustomException {
         LOGGER.info("Method to calculate average value start");
-        if (customArray == null) {
-            throw new CustomException("Array can not be NULL");
-        }
+        ArrayValidator.checkingCustomArray(customArray);
         try {
             double average = (double) sumArrayElements(customArray) / customArray.getArray().length;
             return average;
@@ -42,9 +39,7 @@ public class CalculateServiceCustomImpl implements CalculateService {
     @Override
     public int determineAmountNegDigit(CustomArray customArray) throws CustomException {
         LOGGER.info("Method to count amount of negative elements in array start");
-        if (customArray == null) {
-            throw new CustomException("Array can not be NULL");
-        }
+        ArrayValidator.checkingCustomArray(customArray);
         int amount = 0;
         for (int i : customArray.getArray()) {
             if (i < 0) {
@@ -57,9 +52,7 @@ public class CalculateServiceCustomImpl implements CalculateService {
     @Override
     public int determineAmountPosDigit(CustomArray customArray) throws CustomException {
         LOGGER.info("Method to count amount of positive elements in array start");
-        if (customArray == null) {
-            throw new CustomException("Array can not be NULL");
-        }
+        ArrayValidator.checkingCustomArray(customArray);
         int amount = 0;
         for (int i : customArray.getArray()) {
             if (i > 0) {

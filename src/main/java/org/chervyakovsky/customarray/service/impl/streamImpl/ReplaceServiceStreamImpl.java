@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 import org.chervyakovsky.customarray.entity.CustomArray;
 import org.chervyakovsky.customarray.exception.CustomException;
 import org.chervyakovsky.customarray.service.ReplaceService;
+import org.chervyakovsky.customarray.util.ArrayValidator;
 
 import java.util.Arrays;
 
@@ -15,9 +16,7 @@ public class ReplaceServiceStreamImpl implements ReplaceService {
     @Override
     public void replaceAll(CustomArray customArray, int newValue, int oldValue) throws CustomException {
         LOGGER.info("Method replace elements start");
-        if (customArray == null) {
-            throw new CustomException("Array can not be NULL");
-        }
+        ArrayValidator.checkingCustomArray(customArray);
         int[] array = customArray.getArray();
         if (array.length == 0) {
             return;
@@ -29,9 +28,7 @@ public class ReplaceServiceStreamImpl implements ReplaceService {
     @Override
     public void replaceNegativeValue(CustomArray customArray, int newValue) throws CustomException {
         LOGGER.info("Method replace elements start");
-        if (customArray == null) {
-            throw new CustomException("Array can not be NULL");
-        }
+        ArrayValidator.checkingCustomArray(customArray);
         int[] array = customArray.getArray();
         if (array.length == 0) {
             return;

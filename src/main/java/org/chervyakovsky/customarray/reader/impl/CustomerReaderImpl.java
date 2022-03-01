@@ -6,9 +6,9 @@ import org.chervyakovsky.customarray.exception.CustomException;
 import org.chervyakovsky.customarray.reader.CustomerReader;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,10 +21,9 @@ public class CustomerReaderImpl implements CustomerReader {
         LOGGER.info("Method to read data from file start");
         checkFile(fileName);
         ArrayList<String> arrayList = new ArrayList<>();
-        String currentString;
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(new File(fileName)))) {//FIXME
-            while ((currentString = bufferedReader.readLine()) != null) {
-                arrayList.add(currentString);
+        try (BufferedReader reader = Files.newBufferedReader(Paths.get(fileName))) {
+            while (reader.ready()) {
+                arrayList.add(reader.readLine());
             }
         } catch (IOException e) {
             LOGGER.error("The problem with reading the file", e);
@@ -38,15 +37,6 @@ public class CustomerReaderImpl implements CustomerReader {
         if (fileName == null || fileName.trim().isEmpty()) {
             LOGGER.error("FileName is null or empty string");
             throw new CustomException("FileName is null or empty string");
-        }
-        File file = new File(fileName);
-        if (!file.exists()) {
-            LOGGER.error("The file does not exist");
-            throw new CustomException("The file " + fileName + " does not exist");
-        }
-        if (!file.canRead()) {
-            LOGGER.error("The file cannot be read or is empty");
-            throw new CustomException("The file " + fileName + " cannot be read or is empty");
         }
     }
 }

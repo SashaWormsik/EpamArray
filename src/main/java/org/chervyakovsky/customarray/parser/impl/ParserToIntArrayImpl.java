@@ -13,8 +13,8 @@ import java.util.stream.Stream;
 
 public class ParserToIntArrayImpl implements ParserToIntArray {
 
-    private static final String SEPARATOR = ",";
     private static final Logger LOGGER = LogManager.getLogger();
+    private static final String SEPARATOR = ",";
 
     @Override
     public List<int[]> parseAll(List<String> dataString) throws CustomException {
@@ -23,9 +23,9 @@ public class ParserToIntArrayImpl implements ParserToIntArray {
         List<int[]> listInt = new ArrayList<>();
         CustomerArrayValidator validator = CustomerArrayValidator.getInstance();
         Iterator<String> dataStringIterator = dataString.listIterator();
-        while (dataStringIterator.hasNext()){
+        while (dataStringIterator.hasNext()) {
             String string = dataStringIterator.next();
-            if (validator.isValid(string)){
+            if (validator.isValid(string)) {
                 int[] arrayInt = parseToIntArrayFromString(string);
                 listInt.add(arrayInt);
             }
@@ -37,12 +37,12 @@ public class ParserToIntArrayImpl implements ParserToIntArray {
     public int[] parseFirst(List<String> dataString) throws CustomException {
         LOGGER.info("Parse first valid string in List<String>");
         validateListString(dataString);
-        int[] arrayInt = new int [0]; //FIXME
+        int[] arrayInt = new int[0];
         CustomerArrayValidator validator = CustomerArrayValidator.getInstance();
         Iterator<String> dataStringIterator = dataString.listIterator();
-        while (dataStringIterator.hasNext()){
+        while (dataStringIterator.hasNext()) {
             String string = dataStringIterator.next();
-            if (validator.isValid(string)){
+            if (validator.isValid(string)) {
                 arrayInt = parseToIntArrayFromString(string);
                 break;
             }
@@ -50,19 +50,7 @@ public class ParserToIntArrayImpl implements ParserToIntArray {
         return arrayInt;
     }
 
-    private void validateString(String string) throws CustomException { //FIXME
-        CustomerArrayValidator validator = CustomerArrayValidator.getInstance();
-        if (string == null) {
-            LOGGER.error("String is NULL");
-            throw new CustomException("String is NULL in validateString method");
-        }
-        if (!validator.isValid(string)) {
-            LOGGER.error("Incorrect string");
-            throw new CustomException("Incorrect string: " + string);
-        }
-    }
-
-    private void validateListString(List<String> dataString) throws CustomException { //FIXME
+    private void validateListString(List<String> dataString) throws CustomException {
         CustomerArrayValidator validator = CustomerArrayValidator.getInstance();
         if (dataString == null) {
             LOGGER.error("List<String> is NULL");
@@ -80,7 +68,7 @@ public class ParserToIntArrayImpl implements ParserToIntArray {
         }
     }
 
-    private int[] parseToIntArrayFromString(String string) { // FIXME
+    private int[] parseToIntArrayFromString(String string) {
         LOGGER.info("Parse from String to int[]");
         int[] arrayInt;
         if (string.trim().isEmpty()) {
@@ -93,28 +81,5 @@ public class ParserToIntArrayImpl implements ParserToIntArray {
         }
         return arrayInt;
     }
-
-     /* public List<int[]> parseAll(List<String> dataString) throws CustomException {
-        LOGGER.info("Method to parse data from string start");
-        if (dataString == null) {
-            LOGGER.log(Level.ERROR, "Incorrect line dataString");
-            throw new CustomException("The passed array of strings is NULL");
-        }
-        int[] array = new int[0];
-        Iterator<String> dataStringIterator = dataString.listIterator();
-        while (dataStringIterator.hasNext()) {
-            String string = dataStringIterator.next();
-            if (string.trim().isEmpty()) {
-                break;
-            } else if (true) {
-                array = Stream.of(string.split(SEPARATOR))
-                        .map(String::trim)
-                        .mapToInt(Integer::valueOf)
-                        .toArray();
-                break;
-            }
-        }
-        return null;
-    }*/
 
 }

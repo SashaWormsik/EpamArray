@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 import org.chervyakovsky.customarray.entity.CustomArray;
 import org.chervyakovsky.customarray.exception.CustomException;
 import org.chervyakovsky.customarray.service.SortingService;
+import org.chervyakovsky.customarray.util.ArrayValidator;
 
 import java.util.Arrays;
 
@@ -15,9 +16,7 @@ public class SortingServiceCustomImpl implements SortingService {
     @Override
     public void selectionSort(CustomArray customArray) throws CustomException {
         LOGGER.info("Method to sort array by selectionSort start");
-        if (customArray == null) {
-            throw new CustomException("Array can not be NULL");
-        }
+        ArrayValidator.checkingCustomArray(customArray);
         int[] array = customArray.getArray();
         for (int i = 0; i < array.length; i++) {
             int minIndex = minIndex(array, i, array.length);
@@ -30,9 +29,7 @@ public class SortingServiceCustomImpl implements SortingService {
     @Override
     public void bubbleSort(CustomArray customArray) throws CustomException {
         LOGGER.info("Method to sort array by bubbleSort start");
-        if (customArray == null) {
-            throw new CustomException("Array can not be NULL");
-        }
+        ArrayValidator.checkingCustomArray(customArray);
         int[] array = customArray.getArray();
         for (int i = array.length - 1; i > 0; i--) {
             for (int j = 0; j < i; j++) {
@@ -49,9 +46,7 @@ public class SortingServiceCustomImpl implements SortingService {
     @Override
     public void insertionSort(CustomArray customArray) throws CustomException {
         LOGGER.info("Method to sort array by insertionSort start");
-        if (customArray == null) {
-            throw new CustomException("Array can not be NULL");
-        }
+        ArrayValidator.checkingCustomArray(customArray);
         int[] array = customArray.getArray();
         for (int i = 0; i < array.length; i++) {
             int temp = array[i];
@@ -68,9 +63,7 @@ public class SortingServiceCustomImpl implements SortingService {
     @Override
     public void streamSort(CustomArray customArray) throws CustomException {
         LOGGER.info("Method to sort array by stream start");
-        if (customArray == null) {
-            throw new CustomException("Array can not be NULL");
-        }
+        ArrayValidator.checkingCustomArray(customArray);
         int [] array = customArray.getArray();
         array = Arrays.stream(array).sorted().toArray();
         customArray.setArray(array);

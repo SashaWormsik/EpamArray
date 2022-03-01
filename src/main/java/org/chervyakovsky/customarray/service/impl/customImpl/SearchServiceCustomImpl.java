@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 import org.chervyakovsky.customarray.entity.CustomArray;
 import org.chervyakovsky.customarray.exception.CustomException;
 import org.chervyakovsky.customarray.service.SearchService;
+import org.chervyakovsky.customarray.util.ArrayValidator;
 
 public class SearchServiceCustomImpl implements SearchService {
 
@@ -13,9 +14,7 @@ public class SearchServiceCustomImpl implements SearchService {
     @Override
     public int searchMin(CustomArray customArray) throws CustomException {
         LOGGER.info("Method to find min element start");
-        if (customArray == null) {
-            throw new CustomException("Array can not be NULL");
-        }
+        ArrayValidator.checkingCustomArray(customArray);
         int[] array = customArray.getArray();
         int min = array[0];
         for (int i : array) {
@@ -29,9 +28,7 @@ public class SearchServiceCustomImpl implements SearchService {
     @Override
     public int searchMax(CustomArray customArray) throws CustomException {
         LOGGER.info("Method to find max element start");
-        if (customArray == null) {
-            throw new CustomException("Array can not be NULL");
-        }
+        ArrayValidator.checkingCustomArray(customArray);
         int[] array = customArray.getArray();
         int max = array[0];
         for (int i : array) {

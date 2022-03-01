@@ -1,23 +1,16 @@
 package org.chervyakovsky.customarray.entity;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import java.util.Arrays;
 
 public class CustomArray {
 
-    private static final Logger LOGGER = LogManager.getLogger();
-
     private int[] array;
 
     public CustomArray() {
-        LOGGER.info("Default CustomArray constructor with array of length 0");
         this.array = new int[0];
     }
 
     public CustomArray(int... array) {
-        LOGGER.info("CustomArray constructor from an array (" + Arrays.toString(array) + ")");
         this.array = (array == null ? null : Arrays.copyOf(array, array.length));
     }
 
