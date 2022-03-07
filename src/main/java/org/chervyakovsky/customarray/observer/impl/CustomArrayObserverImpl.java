@@ -13,6 +13,9 @@ import org.chervyakovsky.customarray.service.SearchService;
 import org.chervyakovsky.customarray.service.impl.customImpl.CalculateServiceCustomImpl;
 import org.chervyakovsky.customarray.service.impl.customImpl.SearchServiceCustomImpl;
 
+import java.util.OptionalDouble;
+import java.util.OptionalInt;
+
 public class CustomArrayObserverImpl implements CustomArrayObserver {
 
     private static final Logger LOGGER = LogManager.getLogger();
@@ -23,10 +26,10 @@ public class CustomArrayObserverImpl implements CustomArrayObserver {
         SearchService searchService = new SearchServiceCustomImpl();
         CustomArray customArray = event.getSource();
         try {
-            int min = searchService.searchMin(customArray);
-            int max = searchService.searchMax(customArray);
-            double average = calculateService.averageArrayElements(customArray);
-            int sum = calculateService.sumArrayElements(customArray);
+            OptionalInt min = searchService.searchMin(customArray);
+            OptionalInt max = searchService.searchMax(customArray);
+            OptionalDouble average = calculateService.averageArrayElements(customArray);
+            OptionalInt sum = calculateService.sumArrayElements(customArray);
             CustomArrayParameter parameter = new CustomArrayParameter(max, min, average, sum);
             Warehouse warehouse = Warehouse.getInstance();
             warehouse.put(customArray.getId(), parameter);

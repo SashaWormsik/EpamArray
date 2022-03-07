@@ -27,8 +27,8 @@ public class Warehouse {
         return this.parameter.get(id);
     }
 
-    public CustomArrayParameter put(Integer id, CustomArrayParameter value) {
-        return this.parameter.put(id, value);
+    public void put(Integer id, CustomArrayParameter value) {
+        this.parameter.put(id, value);
     }
 
     public void putAll(Map<Integer, CustomArrayParameter> parameters) {

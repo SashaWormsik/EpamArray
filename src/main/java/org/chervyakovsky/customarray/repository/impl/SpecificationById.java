@@ -17,9 +17,6 @@ public class SpecificationById implements Specification {
 
     @Override
     public boolean specify(CustomArray customArray) {
-        if(customArray == null){
-            return false;
-        }
-        return this.id == customArray.getId();
+        return customArray != null && this.id == customArray.getId();
     }
 }

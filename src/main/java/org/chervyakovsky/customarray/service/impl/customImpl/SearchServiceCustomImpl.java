@@ -5,16 +5,22 @@ import org.apache.logging.log4j.Logger;
 import org.chervyakovsky.customarray.entity.CustomArray;
 import org.chervyakovsky.customarray.exception.CustomException;
 import org.chervyakovsky.customarray.service.SearchService;
-import org.chervyakovsky.customarray.util.ArrayValidatorUtil;
+import org.chervyakovsky.customarray.util.ArrayValidatorUtils;
+
+import java.util.OptionalInt;
 
 public class SearchServiceCustomImpl implements SearchService {
 
     private static final Logger LOGGER = LogManager.getLogger();
 
     @Override
-    public int searchMin(CustomArray customArray) throws CustomException {
+    public OptionalInt searchMin(CustomArray customArray) throws CustomException {
         LOGGER.info("Method to find min element start");
-        ArrayValidatorUtil.checkingCustomArray(customArray);
+        ArrayValidatorUtils.checkingCustomArray(customArray);
+        if (customArray.getArray().length == 0) {
+            LOGGER.info("Min not found, the number of elements is 0 in " + customArray);
+            return OptionalInt.empty();
+        }
         int[] array = customArray.getArray();
         int min = array[0];
         for (int i : array) {
@@ -22,13 +28,17 @@ public class SearchServiceCustomImpl implements SearchService {
                 min = i;
             }
         }
-        return min;
+        return OptionalInt.of(min);
     }
 
     @Override
-    public int searchMax(CustomArray customArray) throws CustomException {
+    public OptionalInt searchMax(CustomArray customArray) throws CustomException {
         LOGGER.info("Method to find max element start");
-        ArrayValidatorUtil.checkingCustomArray(customArray);
+        ArrayValidatorUtils.checkingCustomArray(customArray);
+        if (customArray.getArray().length == 0) {
+            LOGGER.info("Max not found, the number of elements is 0 in " + customArray);
+            return OptionalInt.empty();
+        }
         int[] array = customArray.getArray();
         int max = array[0];
         for (int i : array) {
@@ -36,6 +46,6 @@ public class SearchServiceCustomImpl implements SearchService {
                 max = i;
             }
         }
-        return max;
+        return OptionalInt.of(max);
     }
 }

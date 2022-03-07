@@ -5,7 +5,7 @@ import org.chervyakovsky.customarray.exception.CustomException;
 
 import java.util.List;
 
-public interface CustomerArrayFactory {
+public interface CustomArrayFactory {
 
     CustomArray createCustomArray();
 

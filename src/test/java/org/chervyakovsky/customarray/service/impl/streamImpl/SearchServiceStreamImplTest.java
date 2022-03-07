@@ -1,4 +1,4 @@
-package org.chervyakovsky.customarray.service.impl.customImpl;
+package org.chervyakovsky.customarray.service.impl.streamImpl;
 
 import org.chervyakovsky.customarray.entity.CustomArray;
 import org.chervyakovsky.customarray.exception.CustomException;
@@ -12,7 +12,8 @@ import java.util.OptionalInt;
 
 import static org.testng.Assert.assertEquals;
 
-public class SearchServiceCustomImplTest {
+public class SearchServiceStreamImplTest {
+
     SearchService searchService;
 
     @DataProvider(name = "data_for_min")
@@ -47,7 +48,7 @@ public class SearchServiceCustomImplTest {
 
     @BeforeClass
     public void setSearchService() {
-        searchService = new SearchServiceCustomImpl();
+        searchService = new SearchServiceStreamImpl();
     }
 
     @Test(dataProvider = "data_for_min")

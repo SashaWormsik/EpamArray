@@ -10,7 +10,7 @@ public class CustomArrayEvent extends EventObject {
         super(source);
     }
 
-    public CustomArray getSource(){
+    public CustomArray getSource() {
         return (CustomArray) super.getSource();
     }
 }

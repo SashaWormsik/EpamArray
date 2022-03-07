@@ -1,22 +1,15 @@
 package org.chervyakovsky.customarray.main;
 
+import org.chervyakovsky.customarray.comparator.CustomArrayComparator;
 import org.chervyakovsky.customarray.config.RepositoryConfig;
 import org.chervyakovsky.customarray.config.WarehouseConfig;
-import org.chervyakovsky.customarray.entity.CustomArray;
 import org.chervyakovsky.customarray.entity.Warehouse;
 import org.chervyakovsky.customarray.exception.CustomException;
 import org.chervyakovsky.customarray.observer.CustomArrayObserver;
 import org.chervyakovsky.customarray.observer.impl.CustomArrayObserverImpl;
 import org.chervyakovsky.customarray.repository.Repository;
-import org.chervyakovsky.customarray.repository.impl.RepositoryImpl;
 import org.chervyakovsky.customarray.service.ReplaceService;
 import org.chervyakovsky.customarray.service.impl.customImpl.ReplaceServiceCustomImpl;
-
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
@@ -35,7 +28,11 @@ public class Main {
                 e.printStackTrace();
             }
         });
-       System.out.println(repository);
-       System.out.println(warehouse);
+        System.out.println(repository);
+        System.out.println(warehouse);
+        repository.add(null);
+        System.out.println(repository.sort(CustomArrayComparator.COUNT_ELEMENT));
+        System.out.println(repository.sort(CustomArrayComparator.FIRST_ELEMENT));
+        System.out.println(repository);
     }
 }

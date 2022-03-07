@@ -8,6 +8,8 @@ import org.chervyakovsky.customarray.repository.Specification;
 import org.chervyakovsky.customarray.service.CalculateService;
 import org.chervyakovsky.customarray.service.impl.customImpl.CalculateServiceCustomImpl;
 
+import java.util.OptionalDouble;
+
 public class SpecificationByLargeAverage implements Specification {
 
     private static final Logger LOGGER = LogManager.getLogger();
@@ -23,10 +25,14 @@ public class SpecificationByLargeAverage implements Specification {
         boolean result = false;
         CalculateService calculateService = new CalculateServiceCustomImpl();
         try {
-            double average = calculateService.averageArrayElements(customArray);
-            result = (average > this.comparedValue);
-        } catch (CustomException e) {
-            LOGGER.error("The average value is not calculated", e);
+            OptionalDouble average = calculateService.averageArrayElements(customArray);
+            if (average.isPresent()) {
+                result = (average.getAsDouble() > this.comparedValue);
+            } else {
+                LOGGER.info("Average optional is empty" + average);
+            }
+        } catch (CustomException exception) {
+            LOGGER.error("The average value is not calculated", exception);
         }
         return result;
     }

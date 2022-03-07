@@ -5,41 +5,50 @@ import org.apache.logging.log4j.Logger;
 import org.chervyakovsky.customarray.entity.CustomArray;
 import org.chervyakovsky.customarray.exception.CustomException;
 import org.chervyakovsky.customarray.service.CalculateService;
-import org.chervyakovsky.customarray.util.ArrayValidatorUtil;
+import org.chervyakovsky.customarray.util.ArrayValidatorUtils;
+
+import java.util.OptionalDouble;
+import java.util.OptionalInt;
 
 public class CalculateServiceCustomImpl implements CalculateService {
 
     private static final Logger LOGGER = LogManager.getLogger();
 
     @Override
-    public int sumArrayElements(CustomArray customArray) throws CustomException {
+    public OptionalInt sumArrayElements(CustomArray customArray) throws CustomException {
         LOGGER.info("Method to calculate sum of array start");
-        ArrayValidatorUtil.checkingCustomArray(customArray);
+        ArrayValidatorUtils.checkingCustomArray(customArray);
+        if (customArray.getArray().length == 0) {
+            LOGGER.info("It is impossible to calculate the sum, the number of elements is 0 in " + customArray);
+            return OptionalInt.empty();
+        }
         int[] array = customArray.getArray();
         int sum = 0;
         for (int i : array) {
             sum += i;
         }
-        return sum;
+        return OptionalInt.of(sum);
     }
 
     @Override
-    public double averageArrayElements(CustomArray customArray) throws CustomException {
+    public OptionalDouble averageArrayElements(CustomArray customArray) throws CustomException {
         LOGGER.info("Method to calculate average value start");
-        ArrayValidatorUtil.checkingCustomArray(customArray);
-        try {
-            double average = (double) sumArrayElements(customArray) / customArray.getArray().length;
-            return average;
-        } catch (ArithmeticException e) {
-            LOGGER.error("Division by zero. Array is empty", e);
-            throw new CustomException("Division by zero. Array is empty", e);
+        ArrayValidatorUtils.checkingCustomArray(customArray);
+        int lengthArray = customArray.getArray().length;
+        OptionalInt sum = sumArrayElements(customArray);
+        if (lengthArray == 0 || !sum.isPresent()) {
+            LOGGER.info("It is impossible to calculate the average, the number of elements is 0 in " + customArray);
+            return OptionalDouble.empty();
+        } else {
+            double average = (double) sum.getAsInt() / lengthArray;
+            return OptionalDouble.of(average);
         }
     }
 
     @Override
     public int determineAmountNegDigit(CustomArray customArray) throws CustomException {
         LOGGER.info("Method to count amount of negative elements in array start");
-        ArrayValidatorUtil.checkingCustomArray(customArray);
+        ArrayValidatorUtils.checkingCustomArray(customArray);
         int amount = 0;
         for (int i : customArray.getArray()) {
             if (i < 0) {
@@ -52,7 +61,7 @@ public class CalculateServiceCustomImpl implements CalculateService {
     @Override
     public int determineAmountPosDigit(CustomArray customArray) throws CustomException {
         LOGGER.info("Method to count amount of positive elements in array start");
-        ArrayValidatorUtil.checkingCustomArray(customArray);
+        ArrayValidatorUtils.checkingCustomArray(customArray);
         int amount = 0;
         for (int i : customArray.getArray()) {
             if (i > 0) {

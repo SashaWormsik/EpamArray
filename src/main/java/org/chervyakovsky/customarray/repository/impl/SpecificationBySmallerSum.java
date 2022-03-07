@@ -8,6 +8,8 @@ import org.chervyakovsky.customarray.repository.Specification;
 import org.chervyakovsky.customarray.service.CalculateService;
 import org.chervyakovsky.customarray.service.impl.customImpl.CalculateServiceCustomImpl;
 
+import java.util.OptionalInt;
+
 public class SpecificationBySmallerSum implements Specification {
 
     private static final Logger LOGGER = LogManager.getLogger();
@@ -23,10 +25,14 @@ public class SpecificationBySmallerSum implements Specification {
         boolean result = false;
         CalculateService calculateService = new CalculateServiceCustomImpl();
         try {
-            double sum = calculateService.sumArrayElements(customArray);
-            result = (sum < this.comparedValue);
-        } catch (CustomException e) {
-            LOGGER.error("The sum value is not calculated", e);
+            OptionalInt sum = calculateService.sumArrayElements(customArray);
+            if (sum.isPresent()) {
+                result = (sum.getAsInt() < this.comparedValue);
+            } else {
+                LOGGER.info("Sum optional is empty" + sum);
+            }
+        } catch (CustomException exception) {
+            LOGGER.error("The sum value is not calculated", exception);
         }
         return result;
     }

@@ -1,16 +1,19 @@
 package org.chervyakovsky.customarray.entity;
 
+import java.util.OptionalDouble;
+import java.util.OptionalInt;
+
 public class CustomArrayParameter {
 
-    private int max;
-    private int min;
-    private double average;
-    private int sum;
+    private OptionalInt max;
+    private OptionalInt min;
+    private OptionalDouble average;
+    private OptionalInt sum;
 
     public CustomArrayParameter() {
     }
 
-    public CustomArrayParameter(int max, int min, double average, int sum) {
+    public CustomArrayParameter(OptionalInt max, OptionalInt min, OptionalDouble average, OptionalInt sum) {
 
         this.max = max;
         this.min = min;
@@ -18,63 +21,66 @@ public class CustomArrayParameter {
         this.sum = sum;
     }
 
-    public int getMax() {
+    public OptionalInt getMax() {
         return max;
     }
 
-    public void setMax(int max) {
+    public void setMax(OptionalInt max) {
         this.max = max;
     }
 
-    public int getMin() {
+    public OptionalInt getMin() {
         return min;
     }
 
-    public void setMin(int min) {
+    public void setMin(OptionalInt min) {
         this.min = min;
     }
 
-    public double getAverage() {
+    public OptionalDouble getAverage() {
         return average;
     }
 
-    public void setAverage(double average) {
+    public void setAverage(OptionalDouble average) {
         this.average = average;
     }
 
-    public int getSum() {
+    public OptionalInt getSum() {
         return sum;
     }
 
-    public void setSum(int sum) {
+    public void setSum(OptionalInt sum) {
         this.sum = sum;
     }
 
+
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || o.getClass() != this.getClass()) {
+            return false;
+        }
         CustomArrayParameter that = (CustomArrayParameter) o;
-        return max == that.max &&
-                min == that.min &&
-                average == that.average &&
-                sum == that.sum;
+        return max.equals(that.max) &&
+                min.equals(that.min) &&
+                average.equals(that.average) &&
+                sum.equals(that.sum);
     }
 
     @Override
     public int hashCode() {
-        int resultHash = Double.hashCode(this.average) * Integer.hashCode(sum);
-        resultHash += Integer.hashCode(min) * Integer.hashCode(max);
-        return resultHash;
+        return min.hashCode() + max.hashCode() + average.hashCode() + sum.hashCode();
     }
 
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Parameters {max=").append(max).
-                append(", min=").append(min).
-                append(", average=").append(average).
-                append(", sum=").append(sum).
+        stringBuilder.append("Parameters {max=").append(max.isPresent() ? max.getAsInt() : "empty").
+                append(", min=").append(min.isPresent() ? min.getAsInt() : "empty").
+                append(", average=").append(average.isPresent() ? average.getAsDouble() : "empty").
+                append(", sum=").append(sum.isPresent() ? sum.getAsInt() : "empty").
                 append('}');
         return stringBuilder.toString();
     }

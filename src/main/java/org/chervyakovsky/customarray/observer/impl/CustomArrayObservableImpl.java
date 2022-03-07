@@ -5,28 +5,25 @@ import org.chervyakovsky.customarray.observer.CustomArrayEvent;
 import org.chervyakovsky.customarray.observer.CustomArrayObservable;
 import org.chervyakovsky.customarray.observer.CustomArrayObserver;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public abstract class CustomArrayObservableImpl implements CustomArrayObservable {
 
-    private CustomArrayObserver observer;
+    private CustomArrayObserver observers;
 
     @Override
-    public void attach(CustomArrayObserver observer) {
-        this.observer = observer;
+    public void attach(CustomArrayObserver observers) {
+        this.observers = observers;
     }
 
     @Override
     public void detach() {
-        this.observer = null;
+        this.observers = null;
     }
 
     @Override
-    public void notifyObserver() {
+    public void notifyObservers() {
         CustomArrayEvent event = new CustomArrayEvent((CustomArray) this);
-        if (observer != null) {
-            observer.updateCustomArrayParameter(event);
+        if (observers != null) {
+            observers.updateCustomArrayParameter(event);
         }
     }
 }

@@ -4,34 +4,92 @@ import org.chervyakovsky.customarray.entity.CustomArray;
 import org.chervyakovsky.customarray.exception.CustomException;
 import org.chervyakovsky.customarray.service.SortingService;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class SortingServiceCustomImplTest {
 
-    SortingService sortingService = new SortingServiceCustomImpl();
-    CustomArray customArray = new CustomArray(2, 3, 0, -4);
+    private SortingService sortingService;
 
-    @Test
-    public void bubbleSortTest() throws CustomException {
-        int[] expect = new int[] {-4, 0, 2, 3};
-        sortingService.bubbleSort(customArray);
-        int[] actual = customArray.getArray();
-        Assert.assertEquals(actual, expect);
+    @DataProvider(name = "data")
+    public Object[][] createData() {
+        Object[][] data = new Object[3][2];
+        data[0] = new Object[]{
+                new CustomArray(),
+                new CustomArray()};
+        data[1] = new Object[]{
+                new CustomArray(555),
+                new CustomArray(555)};
+        data[2] = new Object[]{
+                new CustomArray(5, -6, 8, 0, -100),
+                new CustomArray(-100, -6, 0, 5, 8)};
+        return data;
     }
 
-    @Test
-    public void selectionSortTest() throws CustomException {
-        int[] expect = new int[] {-4, 0, 2, 3};
-        sortingService.selectionSort(customArray);
-        int[] actual = customArray.getArray();
-        Assert.assertEquals(actual, expect);
+    @BeforeClass
+    public void setSortingService() {
+        sortingService = new SortingServiceCustomImpl();
     }
 
-    @Test
-    public void insertionSortTest() throws CustomException {
-        int[] expect = new int[] {-4, 0, 2, 3};
-        sortingService.insertionSort(customArray);
-        int[] actual = customArray.getArray();
-        Assert.assertEquals(actual, expect);
+    @Test(dataProvider = "data")
+    public void bubbleSortTest(CustomArray actual, CustomArray expected) throws CustomException {
+        sortingService.bubbleSort(actual);
+        Assert.assertEquals(actual, expected);
     }
+
+    @Test(dataProvider = "data")
+    public void selectionSortTest(CustomArray actual, CustomArray expected) throws CustomException {
+        sortingService.selectionSort(actual);
+        Assert.assertEquals(actual, expected);
+    }
+
+    @Test(dataProvider = "data")
+    public void insertionSortTest(CustomArray actual, CustomArray expected) throws CustomException {
+        sortingService.insertionSort(actual);
+        Assert.assertEquals(actual, expected);
+    }
+
+    @Test(dataProvider = "data")
+    public void testStreamSort(CustomArray actual, CustomArray expected) throws CustomException {
+        sortingService.streamSort(actual);
+        Assert.assertEquals(actual, expected);
+    }
+
+    @Test(expectedExceptions = CustomException.class)
+    public void exceptionBubbleSortTest() throws CustomException {
+        sortingService.bubbleSort(new CustomArray(null));
+    }
+
+    @Test(expectedExceptions = CustomException.class)
+    public void exceptionSelectionSortTest() throws CustomException {
+        sortingService.selectionSort(new CustomArray(null));
+    }
+
+    @Test(expectedExceptions = CustomException.class)
+    public void exceptionInsertionSortTest() throws CustomException {
+        sortingService.insertionSort(new CustomArray(null));
+    }
+
+    @Test(expectedExceptions = CustomException.class)
+    public void nullExceptionBubbleSortTest() throws CustomException {
+        sortingService.bubbleSort(null);
+    }
+
+    @Test(expectedExceptions = CustomException.class)
+    public void nullExceptionSelectionSortTest() throws CustomException {
+        sortingService.selectionSort(null);
+    }
+
+    @Test(expectedExceptions = CustomException.class)
+    public void nullExceptionInsertionSortTest() throws CustomException {
+        sortingService.insertionSort(null);
+    }
+
+    @AfterClass
+    public void deleteSortingService() {
+        sortingService = null;
+    }
+
 }

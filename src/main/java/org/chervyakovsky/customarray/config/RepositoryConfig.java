@@ -2,8 +2,8 @@ package org.chervyakovsky.customarray.config;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.chervyakovsky.customarray.creator.CustomerArrayFactory;
-import org.chervyakovsky.customarray.creator.impl.CustomerArrayFactoryImpl;
+import org.chervyakovsky.customarray.creator.CustomArrayFactory;
+import org.chervyakovsky.customarray.creator.impl.CustomArrayFactoryImpl;
 import org.chervyakovsky.customarray.entity.CustomArray;
 import org.chervyakovsky.customarray.exception.CustomException;
 import org.chervyakovsky.customarray.parser.ParserToIntArray;
@@ -23,7 +23,7 @@ public class RepositoryConfig {
         Repository repository = RepositoryImpl.getInstance();
         CustomReader customReader = new CustomReaderImpl();
         ParserToIntArray parser = new ParserToIntArrayImpl();
-        CustomerArrayFactory factory = new CustomerArrayFactoryImpl();
+        CustomArrayFactory factory = new CustomArrayFactoryImpl();
         try {
             List<String> strings = customReader.readAllFile(fileName);
             List<int[]> intList = parser.parseAll(strings);

@@ -2,9 +2,9 @@ package org.chervyakovsky.customarray.observer;
 
 public interface CustomArrayObservable {
 
-    void attach(CustomArrayObserver observer);
+    void attach(CustomArrayObserver observers);
 
     void detach();
 
-    void notifyObserver();
+    void notifyObservers();
 }

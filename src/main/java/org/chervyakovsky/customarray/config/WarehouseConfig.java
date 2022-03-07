@@ -12,6 +12,8 @@ import org.chervyakovsky.customarray.service.impl.customImpl.CalculateServiceCus
 import org.chervyakovsky.customarray.service.impl.customImpl.SearchServiceCustomImpl;
 
 import java.util.List;
+import java.util.OptionalDouble;
+import java.util.OptionalInt;
 
 public class WarehouseConfig {
 
@@ -23,10 +25,10 @@ public class WarehouseConfig {
         SearchService searchService = new SearchServiceCustomImpl();
         for (CustomArray customArray : customArrays) {
             try {
-                int min = searchService.searchMin(customArray);
-                int max = searchService.searchMax(customArray);
-                double average = calculateService.averageArrayElements(customArray);
-                int sum = calculateService.sumArrayElements(customArray);
+                OptionalInt min = searchService.searchMin(customArray);
+                OptionalInt max = searchService.searchMax(customArray);
+                OptionalDouble average = calculateService.averageArrayElements(customArray);
+                OptionalInt sum = calculateService.sumArrayElements(customArray);
                 CustomArrayParameter parameter = new CustomArrayParameter(max, min, average, sum);
                 warehouse.put(customArray.getId(), parameter);
             } catch (CustomException exception) {

@@ -1,4 +1,4 @@
-package org.chervyakovsky.customarray.service.impl.customImpl;
+package org.chervyakovsky.customarray.service.impl.streamImpl;
 
 import org.chervyakovsky.customarray.entity.CustomArray;
 import org.chervyakovsky.customarray.exception.CustomException;
@@ -9,7 +9,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-public class ReplaceServiceCustomImplTest {
+public class ReplaceServiceStreamImplTest {
 
     ReplaceService replaceService;
 
@@ -52,17 +52,18 @@ public class ReplaceServiceCustomImplTest {
 
     @BeforeClass
     public void setCalculateService() {
-        replaceService = new ReplaceServiceCustomImpl();
+        replaceService = new ReplaceServiceStreamImpl();
     }
 
+
     @Test(dataProvider = "data_for_replaceAllTest")
-    public void replaceAllTest(CustomArray actual, int newValue, int oldValue, CustomArray expected) throws CustomException {
+    public void testReplaceAll(CustomArray actual, int newValue, int oldValue, CustomArray expected) throws CustomException {
         replaceService.replaceAll(actual, newValue, oldValue);
         Assert.assertEquals(actual, expected);
     }
 
     @Test(dataProvider = "data_for_replaceNegativeValueTest")
-    public void replaceNegativeValueTest(CustomArray actual, int newValue, CustomArray expected) throws CustomException {
+    public void testReplaceNegativeValue(CustomArray actual, int newValue, CustomArray expected) throws CustomException {
         replaceService.replaceNegativeValue(actual, newValue);
         Assert.assertEquals(actual, expected);
     }

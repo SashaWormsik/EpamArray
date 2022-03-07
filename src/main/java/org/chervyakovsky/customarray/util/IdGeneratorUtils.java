@@ -1,6 +1,6 @@
 package org.chervyakovsky.customarray.util;
 
-public class IdGeneratorUtil {
+public class IdGeneratorUtils {
 
     private static int presentId = 0;
 

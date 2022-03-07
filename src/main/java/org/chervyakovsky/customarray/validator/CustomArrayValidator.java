@@ -20,7 +20,7 @@ public class CustomArrayValidator {
         return instance;
     }
 
-    public boolean isValid(String checkString) {
+    public boolean isValidStringForIntArray(String checkString) {
         boolean isValid = checkString != null && (checkString.trim().isEmpty() || checkString.matches(REGEX_FOR_VALIDATION));
         LOGGER.log(Level.INFO, isValid ? "Valid string: {}" : "Invalid string: {}", checkString);
         return isValid;

@@ -1,4 +1,4 @@
-package org.chervyakovsky.customarray.service.impl.customImpl;
+package org.chervyakovsky.customarray.service.impl.streamImpl;
 
 import org.chervyakovsky.customarray.entity.CustomArray;
 import org.chervyakovsky.customarray.exception.CustomException;
@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 import java.util.OptionalDouble;
 import java.util.OptionalInt;
 
-public class CalculateServiceCustomImplTest {
+public class CalculateServiceStreamImplTest {
 
     private CalculateService calculateService;
 
@@ -78,30 +78,30 @@ public class CalculateServiceCustomImplTest {
 
     @BeforeClass
     public void setCalculateService() {
-        calculateService = new CalculateServiceCustomImpl();
+        calculateService = new CalculateServiceStreamImpl();
     }
 
+
     @Test(dataProvider = "data_for_sum")
-    public void sumArrayElementsTest(CustomArray customArray, OptionalInt expected) throws CustomException {
+    public void SumArrayElementsTest(CustomArray customArray, OptionalInt expected) throws CustomException {
         OptionalInt actual = calculateService.sumArrayElements(customArray);
         Assert.assertEquals(actual, expected);
     }
 
-
     @Test(dataProvider = "data_for_average")
-    public void averageArrayElementsTest(CustomArray customArray, OptionalDouble expected) throws CustomException {
+    public void AverageArrayElementsTest(CustomArray customArray, OptionalDouble expected) throws CustomException {
         OptionalDouble actual = calculateService.averageArrayElements(customArray);
         Assert.assertEquals(actual, expected);
     }
 
     @Test(dataProvider = "data_for_amountNegDigit")
-    public void determineAmountNegDigitTest(CustomArray customArray, int expected) throws CustomException {
+    public void DetermineAmountNegDigitTest(CustomArray customArray, int expected) throws CustomException {
         int actual = calculateService.determineAmountNegDigit(customArray);
         Assert.assertEquals(actual, expected);
     }
 
     @Test(dataProvider = "data_for_amountPosDigit")
-    public void determineAmountPosDigitTest(CustomArray customArray, int expected) throws CustomException {
+    public void DetermineAmountPosDigitTest(CustomArray customArray, int expected) throws CustomException {
         int actual = calculateService.determineAmountPosDigit(customArray);
         Assert.assertEquals(actual, expected);
     }

@@ -14,10 +14,10 @@ import java.util.stream.Collectors;
 public class RepositoryImpl implements Repository {
 
     private static RepositoryImpl instance;
-    private List<CustomArray> customArrayList; // FIXME может тут SET надо, что б избежать повторов
+    private List<CustomArray> customArrayList;
 
     private RepositoryImpl() {
-        customArrayList = new ArrayList<>(); // FIXME может тут SET надо, что б избежать повторов
+        customArrayList = new ArrayList<>();
     }
 
     public static RepositoryImpl getInstance() {
@@ -71,10 +71,10 @@ public class RepositoryImpl implements Repository {
     }
 
     @Override
-    public List<CustomArray> sort(Comparator<CustomArray> comparator) { // FIXME или метод void должен быть?
+    public List<CustomArray> sort(Comparator<CustomArray> comparator) {
         //this.customArrayList.sort(comparator);
         return this.customArrayList.stream()
-                .sorted(comparator)
+                .sorted(Comparator.nullsLast(comparator)) // FIXME решение для сортировки с NULL
                 .collect(Collectors.toList());
     }
 

@@ -1,7 +1,7 @@
 package org.chervyakovsky.customarray.entity;
 
 import org.chervyakovsky.customarray.observer.impl.CustomArrayObservableImpl;
-import org.chervyakovsky.customarray.util.IdGeneratorUtil;
+import org.chervyakovsky.customarray.util.IdGeneratorUtils;
 
 import java.util.Arrays;
 
@@ -11,12 +11,12 @@ public class CustomArray extends CustomArrayObservableImpl {
     private int[] array;
 
     public CustomArray() {
-        this.id = IdGeneratorUtil.generateId();
+        this.id = IdGeneratorUtils.generateId();
         this.array = new int[0];
     }
 
     public CustomArray(int... array) {
-        this.id = IdGeneratorUtil.generateId();
+        this.id = IdGeneratorUtils.generateId();
         this.array = (array == null ? null : Arrays.copyOf(array, array.length));
     }
 
@@ -30,7 +30,7 @@ public class CustomArray extends CustomArrayObservableImpl {
 
     public void setArray(int... array) {
         this.array = Arrays.copyOf(array, array.length);
-        super.notifyObserver();
+        super.notifyObservers();
     }
 
     @Override

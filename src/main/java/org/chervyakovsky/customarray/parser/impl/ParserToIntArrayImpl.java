@@ -25,7 +25,7 @@ public class ParserToIntArrayImpl implements ParserToIntArray {
         Iterator<String> dataStringIterator = dataString.listIterator();
         while (dataStringIterator.hasNext()) {
             String string = dataStringIterator.next();
-            if (validator.isValid(string)) {
+            if (validator.isValidStringForIntArray(string)) {
                 int[] arrayInt = parseToIntArrayFromString(string);
                 listInt.add(arrayInt);
             }
@@ -42,7 +42,7 @@ public class ParserToIntArrayImpl implements ParserToIntArray {
         Iterator<String> dataStringIterator = dataString.listIterator();
         while (dataStringIterator.hasNext()) {
             String string = dataStringIterator.next();
-            if (validator.isValid(string)) {
+            if (validator.isValidStringForIntArray(string)) {
                 arrayInt = parseToIntArrayFromString(string);
                 break;
             }
@@ -58,7 +58,7 @@ public class ParserToIntArrayImpl implements ParserToIntArray {
         }
         boolean noValidString = true;
         for (String string : dataString) {
-            if (validator.isValid(string)) {
+            if (validator.isValidStringForIntArray(string)) {
                 noValidString = false;
             }
         }
