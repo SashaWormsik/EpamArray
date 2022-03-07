@@ -25,10 +25,7 @@ public enum CustomArrayComparator implements Comparator<CustomArray> {
     }, FIRST_ELEMENT {
         @Override
         public int compare(CustomArray o1, CustomArray o2) {
-            if (o1.getArray().length == 0 || o2.getArray().length == 0) {
-                return Integer.compare(o1.getArray().length, o2.getArray().length);
-            }
-            Comparator<int[]> comparator = Comparator.comparingInt(x -> x[0]);
+            Comparator<int[]> comparator = Comparator.comparingInt(x -> x.length != 0 ? x[0] : x.length);
             return Comparator.nullsLast(comparator).compare(o1.getArray(), o2.getArray()); // FIXME норм так?? если вдруг у нас array = null
         }
     }, COUNT_ELEMENT {

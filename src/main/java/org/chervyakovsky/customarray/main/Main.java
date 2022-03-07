@@ -3,6 +3,7 @@ package org.chervyakovsky.customarray.main;
 import org.chervyakovsky.customarray.comparator.CustomArrayComparator;
 import org.chervyakovsky.customarray.config.RepositoryConfig;
 import org.chervyakovsky.customarray.config.WarehouseConfig;
+import org.chervyakovsky.customarray.entity.CustomArray;
 import org.chervyakovsky.customarray.entity.Warehouse;
 import org.chervyakovsky.customarray.exception.CustomException;
 import org.chervyakovsky.customarray.observer.CustomArrayObserver;
@@ -18,8 +19,6 @@ public class Main {
         Warehouse warehouse = WarehouseConfig.configure(repository.getAll());
         CustomArrayObserver observer = new CustomArrayObserverImpl();
         repository.forEach(array -> array.attach(observer));
-        System.out.println(repository);
-        System.out.println(warehouse);
         ReplaceService replaceService = new ReplaceServiceCustomImpl();
         repository.forEach(array -> {
             try {
@@ -31,8 +30,10 @@ public class Main {
         System.out.println(repository);
         System.out.println(warehouse);
         repository.add(null);
+        int[] i = null;
+        CustomArray array = new CustomArray(i);
+        repository.add(array);
         System.out.println(repository.sort(CustomArrayComparator.COUNT_ELEMENT));
         System.out.println(repository.sort(CustomArrayComparator.FIRST_ELEMENT));
-        System.out.println(repository);
     }
 }
